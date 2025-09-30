@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register - User Management System</title>
+
+
+
+    <!-- Bootstrap CSS -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+
+    <link rel="stylesheet" href="../CSS/style.css">
+
+</head>
+
+<body class="auth-page"><!-- Animated Background -->
+
+    <div class="animated-bg">
+
+        <div class="gradient-orb orb-1"></div>
+
+        <div class="gradient-orb orb-2"></div>
+
+        <div class="gradient-orb orb-3"></div>
+
+    </div>
+
+
+
+    <!-- Back Button -->
+
+    <a href="index.html" class="back-btn">
+
+        <i class="fas fa-arrow-left"></i> Back
+
+    </a>
+
+
+
+    <!-- Main Container -->
+
+    <div class="container">
+
+        <div class="auth-container">
+
+            <div class="auth-card card-3d animate-scale-in">
+
+                <!-- Header -->
+
+                <div class="auth-header">
+
+                    <div class="auth-icon">
+
+                        <i class="fas fa-user-plus"></i>
+
+                    </div>
+
+                    <h2>Create Account</h2>
+
+                    <p>Join us and start your journey</p>
+
+                </div>
+
+
+
+                <!-- Alert Container -->
+
+                <div id="alertContainer"></div>
+
+
+
+                <!-- Registration Form -->
+
+                <form id="registerForm" class="auth-form">
+
+                    <div class="form-group mb-3">
+
+                        <label for="username" class="form-label">
+
+                            <i class="fas fa-user me-2"></i>Username
+
+                        </label>
+
+                        <input type="text" class="form-control form-control-3d" id="username" name="username" required>
+
+                    </div>
+
+
+
+                    <div class="form-group mb-3">
+
+                        <label for="email" class="form-label">
+
+                            <i class="fas fa-envelope me-2"></i>Email Address
+
+                        </label>
+
+                        <input type="email" class="form-control form-control-3d" id="email" name="email" required>
+
+                    </div>
+
+
+
+                    <div class="form-group mb-3">
+
+                        <label for="password" class="form-label">
+
+                            <i class="fas fa-lock me-2"></i>Password
+
+                        </label>
+
+                        <div class="password-input-wrapper">
+
+                            <input type="password" class="form-control form-control-3d" id="password" name="password"
+                                required>
+
+                            <button type="button" class="password-toggle" id="togglePassword">
+
+                                <i class="fas fa-eye"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="form-group mb-3">
+
+                        <label for="confirmPassword" class="form-label">
+
+                            <i class="fas fa-lock me-2"></i>Confirm Password
+
+                        </label>
+
+                        <div class="password-input-wrapper">
+
+                            <input type="password" class="form-control form-control-3d" id="confirmPassword"
+                                name="confirmPassword" required>
+
+                            <button type="button" class="password-toggle" id="toggleConfirmPassword">
+
+                                <i class="fas fa-eye"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="form-check mb-4">
+
+                        <input class="form-check-input" type="checkbox" id="terms" required>
+
+                        <label class="form-check-label" for="terms">
+
+                            I agree to the Terms & Conditions
+
+                        </label>
+
+                    </div>
+
+
+
+                    <button type="submit" class="btn btn-custom btn-register w-100 btn-3d" id="registerBtn">
+
+                        <span class="btn-text">Create Account</span>
+
+                        <span class="btn-loader" style="display: none;">
+
+                            <i class="fas fa-spinner fa-spin"></i> Processing...
+
+                        </span>
+
+                    </button>
+
+                </form>
+
+
+
+                <!-- Footer -->
+
+                <div class="auth-footer">
+
+                    <p>Already have an account? <a href="login.html">Sign In</a></p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- Bootstrap JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- jQuery -->
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    <!-- Custom JS -->
+
+    <script src="../JS/register.js"></script>
+
+</body>
+
+</html>
