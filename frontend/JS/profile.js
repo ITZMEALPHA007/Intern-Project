@@ -53,11 +53,11 @@ function loadProfileData() {
     const userId = localStorage.getItem('userId');
 
     $.ajax({
-        url: `http://localhost:4000/profile/${userId}`,  // ✅ fixed port
+        url: `https://guvi-backend-bfra.onrender.com`,  
         type: 'GET',
         dataType: 'json',
         success: function (response) {
-            console.log("GET response:", response); // 🔍 Debug log
+            console.log("GET response:", response); 
 
             if (response.success && response.profile) {
                 $('#displayAge').text(response.profile.age || 'Not set');
@@ -97,13 +97,13 @@ function updateProfile() {
     };
 
     $.ajax({
-        url: 'http://localhost:4000/profile',  // ✅ fixed port
+        url: 'https://guvi-backend-bfra.onrender.com',  
         type: 'POST',
         dataType: 'json',
         contentType: 'application/json',
         data: JSON.stringify(profileData),
         success: function (response) {
-            console.log("POST response:", response); // 🔍 Debug log
+            console.log("POST response:", response); 
 
             toggleLoadingState('#saveBtn', false);
 
