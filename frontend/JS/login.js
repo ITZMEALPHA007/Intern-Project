@@ -41,7 +41,7 @@ $(document).ready(function() {
 
         // AJAX request to PHP backend
         $.ajax({
-            url: '/GUVI/backend/php/login.php',   // ✅ correct path
+            url: 'http://if0_40066517.infinityfreeapp.com/login.php',   // ✅ correct path
             type: 'POST',
             dataType: 'json',
             data: formData,                       // ✅ normal form data
@@ -77,7 +77,7 @@ $(document).ready(function() {
 // Helper Functions
 function verifySession(token) {
     $.ajax({
-        url: 'backend/php/verify_session.php',
+        url: 'http://if0_40066517.infinityfreeapp.com/session.php',
         type: 'POST',
         dataType: 'json',
         contentType: 'application/json',

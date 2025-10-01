@@ -49,7 +49,7 @@ $(document).ready(function () {
 
         // ✅ Send as standard form data (not JSON)
         $.ajax({
-            url: '/GUVI/backend/php/register.php',
+            url: 'http://if0_40066517.infinityfreeapp.com/register.php',
             type: 'POST',
             dataType: 'json',
             data: {

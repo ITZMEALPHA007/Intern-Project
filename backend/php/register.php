@@ -1,6 +1,7 @@
 <?php
+require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/redis.php';
 header("Content-Type: application/json");
-require 'db.php';   
 
 $username = trim($_POST['username'] ?? '');
 $email = trim($_POST['email'] ?? '');

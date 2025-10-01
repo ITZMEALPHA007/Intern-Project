@@ -138,7 +138,7 @@ function logout() {
     const sessionToken = localStorage.getItem('sessionToken');
 
     $.ajax({
-        url: 'GUVI/backend/php/logout.php',
+        url: 'http://if0_40066517.infinityfreeapp.com/logout.php',
         type: 'POST',
         dataType: 'json',
         contentType: 'application/json',
