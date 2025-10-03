@@ -2,14 +2,8 @@ $(document).ready(function() {
     // Initialize animations
     initAnimations();
 
-    // Check if user is already logged in
     const sessionToken = localStorage.getItem('sessionToken');
-    if (sessionToken) {
-        // TODO: add verify_session.php later if needed
-        // verifySession(sessionToken);
-    }
 
-    // Password toggle functionality
     $('#togglePassword').click(function() {
         togglePasswordVisibility('#password', this);
     });
@@ -41,10 +35,10 @@ $(document).ready(function() {
 
         // AJAX request to PHP backend
         $.ajax({
-            url: 'http://if0_40066517.infinityfreeapp.com/login.php',   // ✅ correct path
+            url: 'https://guvi-php.42web.io/login.php',   
             type: 'POST',
             dataType: 'json',
-            data: formData,                       // ✅ normal form data
+            data: formData,                     
             success: function(response) {
                 toggleLoadingState('#loginBtn', false);
                 
@@ -77,7 +71,7 @@ $(document).ready(function() {
 // Helper Functions
 function verifySession(token) {
     $.ajax({
-        url: 'http://if0_40066517.infinityfreeapp.com/session.php',
+        url: 'https://guvi-php.42web.io/verify_session.php',
         type: 'POST',
         dataType: 'json',
         contentType: 'application/json',

@@ -1,8 +1,7 @@
 $(document).ready(function () {
-    // Initialize animations
+
     initAnimations();
 
-    // Password toggle functionality
     $('#togglePassword').click(function () {
         togglePasswordVisibility('#password', this);
     });
@@ -11,18 +10,15 @@ $(document).ready(function () {
         togglePasswordVisibility('#confirmPassword', this);
     });
 
-    // Form submission
     $('#registerForm').submit(function (e) {
         e.preventDefault();
 
-        // Get form values
         const username = $('#username').val().trim();
         const email = $('#email').val().trim();
         const password = $('#password').val();
         const confirmPassword = $('#confirmPassword').val();
         const termsAccepted = $('#terms').is(':checked');
 
-        // Validation
         if (!username || !email || !password || !confirmPassword) {
             showAlert('Please fill in all fields', 'danger');
             return;
@@ -44,12 +40,10 @@ $(document).ready(function () {
             return;
         }
 
-        // Show loading state
         toggleLoadingState('#registerBtn', true);
 
-        // ✅ Send as standard form data (not JSON)
         $.ajax({
-            url: 'http://if0_40066517.infinityfreeapp.com/register.php',
+            url: 'https://guvi-php.42web.io/register.php',
             type: 'POST',
             dataType: 'json',
             data: {
@@ -63,7 +57,6 @@ $(document).ready(function () {
                 if (response.success) {
                     showAlert('Registration successful! Redirecting to login...', 'success');
 
-                    // Redirect after 2 seconds
                     setTimeout(function () {
                         window.location.href = 'login.html';
                     }, 2000);
@@ -80,7 +73,6 @@ $(document).ready(function () {
     });
 });
 
-// Helper Functions
 function togglePasswordVisibility(inputId, toggleBtn) {
     const input = $(inputId);
     const icon = $(toggleBtn).find('i');

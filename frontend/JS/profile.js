@@ -6,7 +6,6 @@ $(document).ready(function () {
     const email = localStorage.getItem('email');
 
     if (!sessionToken || !userId) {
-        // Not logged in, redirect to login page
         window.location.href = 'login.html';
         return;
     }
@@ -48,7 +47,7 @@ $(document).ready(function () {
 });
 
 
-// 👉 Load profile data from Node backend
+
 function loadProfileData() {
     const userId = localStorage.getItem('userId');
 
@@ -75,7 +74,7 @@ function loadProfileData() {
             }
         },
         error: function (xhr, status, error) {
-            console.error('❌ Error loading profile:', xhr.responseText || error);
+            console.error(' Error loading profile:', xhr.responseText || error);
             showAlert('Failed to load profile', 'danger');
         }
     });
@@ -89,7 +88,7 @@ function updateProfile() {
     toggleLoadingState('#saveBtn', true);
 
     const profileData = {
-        userId: parseInt(userId),  // ✅ make sure it's a number
+        userId: parseInt(userId),  
         age: $('#age').val(),
         dob: $('#dob').val(),
         contact: $('#contact').val(),
@@ -126,19 +125,19 @@ function updateProfile() {
         },
         error: function (xhr, status, error) {
             toggleLoadingState('#saveBtn', false);
-            console.error('❌ Error updating profile:', xhr.responseText || error);
+            console.error(' Error updating profile:', xhr.responseText || error);
             showAlert('An error occurred while updating profile', 'danger');
         }
     });
 }
 
 
-// 👉 Logout function (still handled by PHP)
+
 function logout() {
     const sessionToken = localStorage.getItem('sessionToken');
 
     $.ajax({
-        url: 'http://if0_40066517.infinityfreeapp.com/logout.php',
+        url: 'https://guvi-php.42web.io/logout.php',
         type: 'POST',
         dataType: 'json',
         contentType: 'application/json',

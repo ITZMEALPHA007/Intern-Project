@@ -67,7 +67,7 @@ async function main() {
       console.log(" Node server running at http://localhost:4000");
     });
   } catch (err) {
-    console.error("❌ MongoDB Error:", err);
+    console.error(" MongoDB Error:", err);
   }
 }
 
