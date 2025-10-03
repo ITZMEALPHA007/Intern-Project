@@ -32,10 +32,11 @@ $(document).ready(function () {
         $.ajax({
             url: "https://guvi-php.42web.io/login.php",
             type: "POST",
-            data: formData, // form-data style
+            data: formData, // form-data
             success: function (response) {
                 console.log("Raw response:", response);
-
+        
+                // Ensure JSON parsing
                 try {
                     if (typeof response === "string") {
                         response = JSON.parse(response);
@@ -45,29 +46,32 @@ $(document).ready(function () {
                     showAlert("Server returned invalid response", "danger");
                     return;
                 }
-
+        
+                // ✅ Handle success
                 if (response.success) {
-                    localStorage.setItem("sessionToken", response.sessionToken);
-                    localStorage.setItem("userId", response.userId);
-                    localStorage.setItem("username", response.username);
-                    localStorage.setItem("email", response.email);
-
+                    // Save session info
+                    localStorage.setItem("sessionToken", response.sessionToken || "");
+                    localStorage.setItem("userId", response.userId || "");
+                    localStorage.setItem("username", response.username || "");
+                    localStorage.setItem("email", response.email || "");
+        
                     showAlert("Login successful! Redirecting...", "success");
+        
+                    // ✅ Redirect to profile page
                     setTimeout(function () {
-                        window.location.href = "profile.html";
+                        window.location.href = "../HTML/profile.html";
                     }, 1500);
                 } else {
+                    // Show backend error message
                     showAlert(response.message || "Invalid credentials.", "danger");
                 }
             },
             error: function (xhr, status, error) {
                 console.error("XHR Error:", xhr.responseText || error);
                 showAlert("Could not reach server. Check PHP logs.", "danger");
-            },
-            complete: function () {
-                toggleLoadingState('#loginBtn', false);
             }
         });
+        
     });
 });
 
