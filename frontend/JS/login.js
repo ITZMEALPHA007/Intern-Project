@@ -1,74 +1,78 @@
-$(document).ready(function() {
+$(document).ready(function () {
     // Initialize animations
     initAnimations();
 
     const sessionToken = localStorage.getItem('sessionToken');
 
-    $('#togglePassword').click(function() {
+    $('#togglePassword').click(function () {
         togglePasswordVisibility('#password', this);
     });
 
     // Form submission
-    $('#loginForm').submit(function(e) {
+    $('#loginForm').submit(function (e) {
         e.preventDefault();
-        
-        // Get form values
+
         const username = $('#username').val().trim();
         const password = $('#password').val();
         const rememberMe = $('#rememberMe').is(':checked');
 
-        // Validation
         if (!username || !password) {
             showAlert('Please fill in all fields', 'danger');
             return;
         }
 
-        // Show loading state
         toggleLoadingState('#loginBtn', true);
 
-        // Prepare data
         const formData = {
             username: username,
             password: password,
             rememberMe: rememberMe
         };
 
-        // AJAX request to PHP backend
         $.ajax({
-            url: 'https://guvi-php.42web.io/login.php',   
-            type: 'POST',
-            dataType: 'json',
-            data: formData,                     
-            success: function(response) {
-                toggleLoadingState('#loginBtn', false);
-                
+            url: "https://guvi-php.42web.io/login.php",
+            type: "POST",
+            data: formData, // form-data style
+            success: function (response) {
+                console.log("Raw response:", response);
+
+                try {
+                    if (typeof response === "string") {
+                        response = JSON.parse(response);
+                    }
+                } catch (e) {
+                    console.error("JSON parse error:", e, response);
+                    showAlert("Server returned invalid response", "danger");
+                    return;
+                }
+
                 if (response.success) {
-                    // Store session token in localStorage
-                    localStorage.setItem('sessionToken', response.sessionToken);
-                    localStorage.setItem('userId', response.userId);
-                    localStorage.setItem('username', response.username);
-                    localStorage.setItem('email', response.email);
-                    
-                    showAlert('Login successful! Redirecting...', 'success');
-                    
-                    setTimeout(function() {
-                        window.location.href = 'profile.html';
+                    localStorage.setItem("sessionToken", response.sessionToken);
+                    localStorage.setItem("userId", response.userId);
+                    localStorage.setItem("username", response.username);
+                    localStorage.setItem("email", response.email);
+
+                    showAlert("Login successful! Redirecting...", "success");
+                    setTimeout(function () {
+                        window.location.href = "profile.html";
                     }, 1500);
                 } else {
-                    showAlert(response.message || 'Invalid credentials. Please try again.', 'danger');
+                    showAlert(response.message || "Invalid credentials.", "danger");
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
+                console.error("XHR Error:", xhr.responseText || error);
+                showAlert("Could not reach server. Check PHP logs.", "danger");
+            },
+            complete: function () {
                 toggleLoadingState('#loginBtn', false);
-                console.error('Login error:', error);
-                showAlert('An error occurred during login. Please try again.', 'danger');
             }
         });
     });
 });
 
+// ================= Helper Functions ================= //
 
-// Helper Functions
 function verifySession(token) {
     $.ajax({
         url: 'https://guvi-php.42web.io/verify_session.php',
@@ -76,14 +80,12 @@ function verifySession(token) {
         dataType: 'json',
         contentType: 'application/json',
         data: JSON.stringify({ sessionToken: token }),
-        success: function(response) {
+        success: function (response) {
             if (response.valid) {
-                // Session is valid, redirect to profile
                 window.location.href = 'profile.html';
             }
         },
-        error: function() {
-            // Session invalid, clear storage
+        error: function () {
             localStorage.clear();
         }
     });
@@ -92,7 +94,7 @@ function verifySession(token) {
 function togglePasswordVisibility(inputId, toggleBtn) {
     const input = $(inputId);
     const icon = $(toggleBtn).find('i');
-    
+
     if (input.attr('type') === 'password') {
         input.attr('type', 'text');
         icon.removeClass('fa-eye').addClass('fa-eye-slash');
@@ -109,12 +111,11 @@ function showAlert(message, type) {
             <span>${message}</span>
         </div>
     `;
-    
+
     $('#alertContainer').html(alertHtml);
-    
-    // Auto-hide after 5 seconds
-    setTimeout(function() {
-        $('#alertContainer').fadeOut(function() {
+
+    setTimeout(function () {
+        $('#alertContainer').fadeOut(function () {
             $(this).html('').show();
         });
     }, 5000);
@@ -134,10 +135,10 @@ function toggleLoadingState(btnSelector, isLoading) {
 }
 
 function initAnimations() {
-    // Stagger animations for form elements
-    $('.form-group').each(function(index) {
+    $('.form-group').each(function (index) {
         $(this).css({
             'animation-delay': (index * 0.1) + 's'
         });
     });
 }
+// ================= End of File ================= //
